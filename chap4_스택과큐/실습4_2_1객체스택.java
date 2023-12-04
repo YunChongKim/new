@@ -67,7 +67,7 @@ class objectStack{
 	// generic class는 Throwable을 상속받을 수 없다 - 지원하지 않는다
 
 
-  private List<Point2> data;           // 스택용 배열
+  private List<Point2> data; // 스택용 배열
 	private int capacity; // 스택의 크기
 	private int top; // 스택 포인터
 
@@ -172,16 +172,19 @@ public class 실습4_2_1객체스택 {
 			System.out.printf("현재 데이터 개수: %d / %d\n", s.size(), s.getCapacity());
 			System.out.print("(1)push　(2)pop　(3)peek　(4)dump　(0)종료: ");
 
+			// 입력값이 0이면 종료
 			int menu = stdIn.nextInt();
 			if (menu == 0)
 				break;
 
 			switch (menu) {
 			case 1: // 푸시
-				
+			
+			//~20까지의 수를 랜덤하게 생성 
 				rndx = random.nextInt(20);
 				rndy = random.nextInt(20);
 				System.out.print("데이터: x="+rndx+" "+ "y="+rndy);
+			//랜덤수 2개를 p에 객체 형태로 저장
 				p = new Point2(rndx,rndy);
 				try {
 					s.push(p);

@@ -32,22 +32,52 @@ class Queue4 {
 
 //--- 생성자(constructor) ---//
 public Queue4(int maxlen) {
-
+	//변수선언 및 초기값 지정
+	num = 0 ;
+	front =0 ;
+	rear = 0 ;
+	capacity = maxlen;
+	try {
+		que = new ArrayList<>(capacity);
+	}catch (OutOfMemoryError e) {
+		capacity = 0;
+	}
+	
+	
 }
 
 //--- 큐에 데이터를 인큐 ---//
 	public int enque(int x) throws OverflowQueueException {
-
+		if(num>=capacity) {
+			throw new OverflowQueueException();
+		}
+		que.add(x); //리스트는 add와 remove로 증감.
+		num++;
+		rear++;
+		return x;
 	}
 
 //--- 큐에서 데이터를 디큐 ---//
 	public int deque() throws EmptyQueueException {
-
+		//리스트에 들어있는 객체의 개수가 0보다 작을 경우 empty
+		if(num<=0) { 
+			throw new EmptyQueueException();
+		}
+		int x = que.remove(front);
+		num--;
+		rear--;
+		return x;
 	}
 
 //--- 큐에서 데이터를 피크(프런트 데이터를 들여다봄) ---//
 	public int peek() throws EmptyQueueException {
-
+		if(num<=0) {
+			throw new EmptyQueueException();
+		}
+		int x = que.get(0);
+		
+		
+		return x;
 	}
 
 //--- 큐를 비움 ---//
@@ -57,7 +87,12 @@ public Queue4(int maxlen) {
 
 //--- 큐에서 x를 검색하여 인덱스(찾지 못하면 –1)를 반환 ---//
 	public int indexOf(int x) {
-
+		for(int i =0; i<num; i++) {
+			if(que.get(i) == x)
+				return i;
+		
+		}
+		return -1;
 	}
 
 //--- 큐의 크기를 반환 ---//
@@ -82,7 +117,15 @@ public Queue4(int maxlen) {
 
 //--- 큐 안의 모든 데이터를 프런트 → 리어 순으로 출력 ---//
 	public void dump() {
-
+		
+			if(num<=0) {
+				System.out.println("데이터가 비었습니다.");
+			}
+		
+			for(int i =0; i<num; i++) {
+				System.out.print(que.get(i)+" ");
+				
+		}
 	}
 }
 public class 실습4_4정수선형큐_리스트 {
@@ -105,7 +148,7 @@ public class 실습4_4정수선형큐_리스트 {
 				try {
 					oq.enque(rndx);
 				} catch(Queue4.OverflowQueueException e) {
-					System.out.println("stack이 가득찼있습니다.");
+					System.out.println("stack이 가득 차있습니다.");
 				}
 				break;
 
